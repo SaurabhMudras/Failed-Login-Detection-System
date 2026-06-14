@@ -1,0 +1,4 @@
+=== Suspicious IP Alert Report ===
+
+ALERT: 192.168.1.10 has 3 failed login attempts
+ALERT: 10.0.0.5 has 4 failed login attempts
