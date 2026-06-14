@@ -16,5 +16,4 @@ print("=== Suspicious IP Report ===")
 for ip, count in failed_attempts.items():
     if count >= threshold:
         print(f"ALERT: {ip} has {count} failed login attempts")
-
-with open("alerts.txt", "w") as alert_file: 
+        
