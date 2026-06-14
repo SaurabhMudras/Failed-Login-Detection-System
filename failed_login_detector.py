@@ -21,8 +21,28 @@ with open(log_file, "r") as file:
 with open(alert_file, "w") as alerts:
     alerts.write("=== Suspicious IP Alert Report ===\n\n")
 
-for ip, count in failed_attempts.items():
-    if count >= threshold:
-        print(f"ALERT: {ip} has {count} failed login attempts")
+    for ip, count in failed_attempts.items():
+        if count >= threshold:
+            alert = f"ALERT: {ip} has {count} failed login attempts\n"
+            alerts.write(alert)
+            print(alert.strip())
 
-with open("alerts.txt", "w") as alert_file: 
+# Generate CSV Report
+with open(csv_file, "w", newline="") as csvfile:
+    writer = csv.writer(csvfile)
+
+    # Header
+    writer.writerow(["IP Address", "Failed Attempts", "Status"])
+
+    # Data Rows
+    for ip, count in failed_attempts.items():
+
+        if count >= threshold:
+            status = "Suspicious"
+        else:
+            status = "Normal"
+
+        writer.writerow([ip, count, status])
+
+print(f"\nAlerts saved to: {alert_file}")
+print(f"CSV report generated: {csv_file}")
